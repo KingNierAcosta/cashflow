@@ -4,10 +4,18 @@
       <Header></Header>
     </template>
     <template #resume>
-      <Resume></Resume>
+      <Resume
+        :total-label="'Ahorro total'"
+        :label="label"
+        :total-amount="totalAmount"
+        :amount="amount"
+      >
+        <template #graphic> Grafic </template>
+        <template #action> Action </template>
+      </Resume>
     </template>
     <template #movements>
-      <Movements></Movements>
+      <Movements :movements="movements"></Movements>
     </template>
   </Layout>
 </template>
@@ -16,7 +24,7 @@
 import Layout from "./Layout.vue";
 import Header from "./Header.vue";
 import Resume from "./Resume/Index.vue";
-import Movements from "./Movements.vue";
+import Movements from "./Movements/Index.vue";
 
 export default {
   components: {
@@ -25,58 +33,43 @@ export default {
     Resume,
     Movements,
   },
+  data() {
+    return {
+      label: null,
+      amount: null,
+      movements: [
+        {
+          id: 1,
+          title: "Movimiento",
+          description: "Deposito de salario",
+          amount: "1000",
+        },
+        {
+          id: 2,
+          title: "Movimiento 1",
+          description: "Deposito de honorarios",
+          amount: "500",
+        },
+        {
+          id: 3,
+          title: "Movimiento 3",
+          description: "Comida",
+          amount: "-100",
+        },
+        {
+          id: 4,
+          title: "Movimiento 4",
+          description: "Colegiatura",
+          amount: "1000",
+        },
+        {
+          id: 5,
+          title: "Movimiento 5",
+          description: "Reparación equipo",
+          amount: "1000",
+        },
+      ],
+    };
+  },
 };
 </script>
-
-<style scoped>
-.header,
-.resume,
-.movements {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 14px 0;
-  box-sizing: border-box;
-}
-
-.header {
-  position: fixed;
-  width: 100vw;
-}
-
-.resume {
-  min-height: 100vh;
-}
-
-.movements {
-  z-index: 1;
-  position: absolute;
-  flex-direction: column;
-  bottom: 0;
-  width: 100vw;
-  background-color: white;
-  box-shadow: 0 -8px 16px #e5e5e5;
-  border-radius: 24px;
-}
-
-.movements .head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.movements .body {
-  height: 75vh;
-  width: 100%;
-}
-
-.movements .head .grip {
-  width: 120px;
-  height: 8px;
-  background-color: #e5e5e5;
-  border-radius: 4px;
-}
-</style>
